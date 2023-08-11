@@ -1,7 +1,7 @@
 <section class="page">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 mx-auto">
+			<div class="col-lg-10 mx-auto">
 				<!-- Load Bludit Plugins: Page Begin -->
 				<?php Theme::plugins('pageBegin'); ?>
 
@@ -11,10 +11,17 @@
 				<?php if (!$page->isStatic() && !$url->notFound() && $themePlugin->showPostInformation()) : ?>
 					<div class="form-text mb-2">
 						<!-- Page creation time -->
-						<span class="pr-3"><i class="bi bi-calendar"></i><?php echo $page->date() ?></span>
+						<span class="pr-3">
+							<i class="bi bi-calendar"></i>
+							<?php if ($themePlugin->dateFormat() == 'relative') : ?>
+								<small class="color-blue"><?php echo $page->relativeTime() ?></small>
+							<?php elseif ($themePlugin->dateFormat() == 'absolute') : ?>
+								<small class="color-blue"><?php echo $page->date() ?></small>
+							<?php endif ?>
+						</span>
 
 						<!-- Page reading time -->
-						<span class="pr-3"><i class="bi bi-clock"></i><?php echo $page->readingTime() . ' ' . $L->get('minutes') . ' ' . $L->g('read') ?></span>
+						<!-- span class="pr-3"><i class="bi bi-clock"></i><?php echo $page->readingTime() . ' ' . $L->get('minutes') . ' ' . $L->g('read') ?></span -->
 
 						<!-- Page author -->
 						<span><i class="bi bi-person"></i><?php echo $page->user('nickname') ?></span>

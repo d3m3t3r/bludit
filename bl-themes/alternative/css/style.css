@@ -11,7 +11,7 @@ body {
 }
 
 section {
-	padding: 150px 0;
+	padding: 50px 0;
 }
 
 img {
@@ -92,6 +92,10 @@ img.nav-svg-icon {
 	padding-bottom: 2px;
 }
 
+img.navbar-brand {
+	width: 32px;
+}
+
 .nav-link {
 	font-size: 0.8em;
 }
@@ -113,7 +117,7 @@ footer {
 
 /* Home - Header */
 header.welcome {
-	padding: 100px 0;
+	padding: 25px 0;
 }
 
 /* Home - Page */

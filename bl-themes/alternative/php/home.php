@@ -1,6 +1,9 @@
 <!-- Welcome message -->
 <header class="welcome bg-light">
 	<div class="container text-center">
+		<!-- Random image -->
+		<?php $imgs = glob('bl-content/uploads/main/*.png'); if ($imgs) echo '<img src="' . $imgs[array_rand($imgs)] . '"/>'; ?>
+
 		<!-- Site title -->
 		<h1><?php echo $site->slogan(); ?></h1>
 
@@ -44,7 +47,7 @@
 	<section class="home-page">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 mx-auto">
+				<div class="col-lg-10 mx-auto">
 					<!-- Load Bludit Plugins: Page Begin -->
 					<?php Theme::plugins('pageBegin'); ?>
 
@@ -52,6 +55,20 @@
 					<a class="text-dark" href="<?php echo $page->permalink(); ?>">
 						<h2 class="title"><?php echo $page->title(); ?></h2>
 					</a>
+
+					<div class="form-text mb-2">
+						<!-- Page creation time -->
+						<span class="pr-3"><i class="bi bi-calendar"></i>
+							<?php if ($themePlugin->dateFormat() == 'relative') : ?>
+								<small class="color-blue"><?php echo $page->relativeTime() ?></small>
+							<?php elseif ($themePlugin->dateFormat() == 'absolute') : ?>
+								<small class="color-blue"><?php echo $page->date() ?></small>
+							<?php endif ?>
+						</span>
+
+						<!-- Page author -->
+						<span><i class="bi bi-person"></i><?php echo $page->user('nickname') ?></span>
+					</div>
 
 					<!-- Page description -->
 					<?php if ($page->description()) : ?>
@@ -68,12 +85,6 @@
 						<div class="text-right pt-3">
 							<a class="btn btn-primary btn-sm" href="<?php echo $page->permalink(); ?>" role="button"><?php echo $L->get('Read more'); ?></a>
 						</div>
-					<?php endif ?>
-
-					<?php if ($themePlugin->dateFormat() == 'relative') : ?>
-						<small class="color-blue"><?php echo $page->relativeTime() ?></small>
-					<?php elseif ($themePlugin->dateFormat() == 'absolute') : ?>
-						<small class="color-blue"><?php echo $page->date() ?></small>
 					<?php endif ?>
 
 					<!-- Load Bludit Plugins: Page End -->
