@@ -1,6 +1,59 @@
 <?php defined('BLUDIT') or die('Bludit CMS.');
 
-class Image {
+// rotor: Some stupid webhosting services do not support gd PHP module.
+if (extension_loaded('imagick')) {
+    class_alias('ImageImagick', 'Image');
+}
+else if (extension_loaded('gd')) {
+    class_alias('ImageGd', 'Image');
+}
+
+class ImageImagick {
+
+    private $fileName;
+    private $newWidth;
+    private $newHeight;
+    private $option;
+
+    public function setImage($fileName, $newWidth, $newHeight, $option="auto")
+    {
+        $this->fileName = $fileName;
+        $this->newWidth = $newWidth;
+        $this->newHeight = $newHeight;
+        $this->option = $option;  //TODO: ignored
+    }
+
+    public function saveImage($savePath, $imageQuality="100", $forceJPG=false, $forcePNG=false)
+    {
+        $path_info = pathinfo($savePath);
+        $extension = strtolower($path_info['extension']);
+
+        $image = new Imagick($this->fileName);
+
+        if ($forcePNG) {
+            $extension = 'png';
+        } elseif ($forceJPG) {
+            $extension = 'jpg';
+        }
+
+        $width = $this->newWidth;
+        $height = $this->newHeight;
+
+        // Make thumbnailImage() to preserve original aspect ratio.
+        if ($width > $height) {
+            $height = 0;
+        } else {
+            $width = 0;
+        }
+
+        $image->setCompressionQuality($imageQuality);
+        $image->thumbnailImage($width, $height);
+        $image->writeImage($path_info['dirname'] . DS . $path_info['filename'] . '.' . $extension);
+        $image->destroy();
+    }
+}
+
+class ImageGd {
 
     private $image;
     private $width;
@@ -270,3 +323,4 @@ class Image {
         imagecopyresampled($this->imageResized, $crop , 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight , $newWidth, $newHeight);
     }
 }
+
