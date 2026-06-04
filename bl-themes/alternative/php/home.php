@@ -10,6 +10,12 @@
 				<?php if ($site->description()) : ?>
 					<p class="hero-subtitle"><?php echo $site->description(); ?></p>
 				<?php endif ?>
+				
+				<!-- rotor: show random main image -->
+				<?php
+				$imgs = glob('bl-content/uploads/main/*.png');
+				if ($imgs) echo '<img src="' . $imgs[array_rand($imgs)] . '"/>';
+				?>
 			<?php endif ?>
 
 			<!-- Custom search form if the plugin "search" is enabled -->
@@ -84,7 +90,8 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-8 mx-auto">
+					<!-- rotor: make div wider -->
+					<div class="col-lg-10 mx-auto">
 						<!-- Load Bludit Plugins: Page Begin -->
 						<?php Theme::plugins('pageBegin'); ?>
 

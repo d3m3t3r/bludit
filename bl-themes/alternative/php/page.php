@@ -1,4 +1,5 @@
 <!-- Breadcrumb Navigation for SEO -->
+<!-- rotor: disable breadcrumbs
 <nav class="breadcrumb-nav" aria-label="<?php echo $L->get('Breadcrumb'); ?>">
 	<div class="container">
 		<ol class="breadcrumb bg-transparent p-0 mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -16,6 +17,7 @@
 		</ol>
 	</div>
 </nav>
+-->
 
 <article class="page" itemscope itemtype="https://schema.org/Article">
 	<!-- Hidden SEO metadata -->
@@ -35,7 +37,8 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 mx-auto">
+			<!-- rotor: make div wider -->
+			<div class="col-lg-10 mx-auto">
 				<!-- Load Bludit Plugins: Page Begin -->
 				<?php Theme::plugins('pageBegin'); ?>
 
@@ -61,10 +64,12 @@
 							<?php endif; ?>
 
 							<!-- Page reading time -->
+							<!-- rotor: disable reading time
 							<span class="pr-3">
 								<i class="bi bi-clock" aria-hidden="true"></i>
 								<span><?php echo $page->readingTime() . ' ' . $L->get('minutes') . ' ' . $L->g('read') ?></span>
 							</span>
+							-->
 
 							<!-- Page author -->
 							<span itemprop="author" itemscope itemtype="https://schema.org/Person">

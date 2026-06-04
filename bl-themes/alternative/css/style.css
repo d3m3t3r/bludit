@@ -503,7 +503,8 @@ footer.footer a:hover {
 
 @media (min-width: 768px) {
 	.hero {
-		padding: 120px 0 80px;
+		/* rotor: decrease padding around random main image */
+		padding: 10px 0 20px;
 	}
 
 	.hero-subtitle {
